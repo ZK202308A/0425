@@ -42,12 +42,41 @@
       let str =''
       for (const todo of todos) {
         const {tno,title,complete} = todo//구조 분해 할당
-        str += `<li>${tno} -- ${title} <button>X</button></li>`
+        str += `<li data-tno="${tno}">${tno} -- ${title} <button>X</button></li>`
       }
       ul.innerHTML= str
     }
 
     render()
+
+    document.querySelector("#saveBtn").addEventListener("click", e => {
+
+      const title = document.querySelector('#inputTitle').value
+
+      addTodo(title)
+
+      render()
+
+    }, false)
+
+    document.querySelector(".listDiv ul").addEventListener("click", e=> {
+
+      const target = e.target
+
+      if(target.tagName !== 'BUTTON'){
+        return
+      }
+
+      const tno = target.closest("li").getAttribute("data-tno")
+
+      console.log("tno: " + tno)
+
+      removeTodo(parseInt(tno))
+      render()
+
+
+    },false)
+
 
   </script>
 
