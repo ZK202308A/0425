@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+  <style>
+    .card {
+        width:90vw;
+        height:40vh;
+        background-color: lightcyan;
+        margin: 0.2em;
+        border: 1px solid gray;
+    }
+  </style>
+
+    <div>
+      <div class="card inputDiv">
+        <input type="text" id="inputTitle" placeholder="Enter title"/>
+        <button id="saveBtn">SAVE</button>
+      </div>
+
+      <div class="card listDiv">
+        <ul>
+
+        </ul>
+      </div>
+    </div>
+
+  <script type="module">
+    import {getTodos, addTodo, removeTodo} from '/todo.js'
+
+    function render() {
+
+      const ul = document.querySelector(".listDiv ul")
+
+      const todos = getTodos()
+
+      let str =''
+      for (const todo of todos) {
+        const {tno,title,complete} = todo//구조 분해 할당
+        str += `<li>${tno} -- ${title} <button>X</button></li>`
+      }
+      ul.innerHTML= str
+    }
+
+    render()
+
+  </script>
+
+  </body>
+</html>
